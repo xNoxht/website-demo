@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Kalorienrechner</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <header id="header" class="alt">
+                <h1><a href="index.html">Spectral</a></h1>
+                <nav id="nav">
+                    <ul>
+                        <li class="special">
+                            <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                            <div id="menu">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="calorie.html">Kalorienrechner</a></li>
+                                    <li><a href="generic.html">Generic</a></li>
+                                    <li><a href="elements.html">Elements</a></li>
+                                    <li><a href="#">Sign Up</a></li>
+                                    <li><a href="#">Log In</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <section id="main" class="container">
+                <header>
+                    <h2>Kalorienrechner</h2>
+                    <p>Tracke deine tägliche Kalorienaufnahme.</p>
+                </header>
+                <div class="box">
+                    <form id="entry-form">
+                        <div class="row gtr-uniform gtr-50">
+                            <div class="col-4 col-12-xsmall">
+                                <input type="date" name="date" id="date" required />
+                            </div>
+                            <div class="col-4 col-12-xsmall">
+                                <input type="text" name="meal" id="meal" placeholder="Mahlzeit" required />
+                            </div>
+                            <div class="col-4 col-12-xsmall">
+                                <input type="number" name="calories" id="calories" placeholder="Kalorien" required />
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li><input type="submit" value="Speichern" class="primary" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="box">
+                    <h3>Einträge</h3>
+                    <table id="entries-table">
+                        <thead>
+                            <tr><th>Datum</th><th>Mahlzeit</th><th>Kalorien</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+            <footer id="footer">
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </footer>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/calorie.js"></script>
+    </body>
+</html>
