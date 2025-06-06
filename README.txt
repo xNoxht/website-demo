@@ -42,4 +42,14 @@ Credits:
 	Other:
 		jQuery (jquery.com)
 		Scrollex (github.com/ajlkn/jquery.scrollex)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+
+## Calorie Tracker
+
+Install dependencies and start the server to use the calorie tracker.
+
+```bash
+npm install
+npm start
+```
+
+The server stores entries in `data/entries.json`.
