@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Finger Selector</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            height: 100%;
+            width: 100%;
+            touch-action: none;
+            overflow: hidden;
+            font-family: sans-serif;
+            color: #fff;
+        }
+        #game {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .touch {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color, #fff);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .winner {
+            animation: pulse 1s infinite;
+            z-index: 10;
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.5); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="game"></div>
+    <div id="message">Gewonnen!</div>
+    <script>
+        const game = document.getElementById('game');
+        const message = document.getElementById('message');
+        const touches = new Map();
+        let timer = null;
+
+        function randomColor(id) {
+            const colors = ['#e74c3c', '#2ecc71', '#3498db', '#9b59b6', '#f1c40f', '#e67e22', '#1abc9c'];
+            return colors[id % colors.length];
+        }
+
+        function resetGame() {
+            timer = null;
+            message.style.display = 'none';
+            touches.forEach(el => el.remove());
+            touches.clear();
+        }
+
+        function startSelection() {
+            if (timer || touches.size < 2) return;
+            timer = setTimeout(() => {
+                const ids = Array.from(touches.keys());
+                const winnerId = ids[Math.floor(Math.random() * ids.length)];
+                const el = touches.get(winnerId);
+                if (el) {
+                    el.classList.add('winner');
+                    message.style.display = 'block';
+                    setTimeout(resetGame, 2000);
+                } else {
+                    resetGame();
+                }
+            }, 2000 + Math.random() * 1000);
+        }
+
+        game.addEventListener('touchstart', e => {
+            e.preventDefault();
+            for (const t of e.changedTouches) {
+                const el = document.createElement('div');
+                el.className = 'touch';
+                el.style.setProperty('--color', randomColor(t.identifier));
+                el.style.left = t.clientX + 'px';
+                el.style.top = t.clientY + 'px';
+                game.appendChild(el);
+                touches.set(t.identifier, el);
+            }
+            startSelection();
+        }, { passive: false });
+
+        game.addEventListener('touchmove', e => {
+            e.preventDefault();
+            for (const t of e.changedTouches) {
+                const el = touches.get(t.identifier);
+                if (el) {
+                    el.style.left = t.clientX + 'px';
+                    el.style.top = t.clientY + 'px';
+                }
+            }
+        }, { passive: false });
+
+        function removeTouches(e) {
+            e.preventDefault();
+            for (const t of e.changedTouches) {
+                const el = touches.get(t.identifier);
+                if (el) {
+                    el.remove();
+                    touches.delete(t.identifier);
+                }
+            }
+            if (touches.size < 2 && timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+        }
+
+        game.addEventListener('touchend', removeTouches, { passive: false });
+        game.addEventListener('touchcancel', removeTouches, { passive: false });
+    </script>
+</body>
+</html>
