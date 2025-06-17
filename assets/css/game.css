@@ -1,0 +1,7 @@
+/* Styles for The Army - Idle Strategy Game */
+#game .bar { margin-bottom: 1em; }
+#resources span { margin-right: 1em; font-weight: bold; }
+#game .flex { display: flex; flex-wrap: wrap; }
+#left, #right { flex: 1 1 300px; margin: 0.5em; }
+#buildings li, #recruit li { margin-bottom: 0.5em; }
+#log { max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 0.5em; }
